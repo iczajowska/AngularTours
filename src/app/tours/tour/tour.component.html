@@ -1,0 +1,21 @@
+<div class="jumbotron" style="border: 5px solid; " 
+    [ngStyle]="{'border-color': bordCol}">
+
+    <button type="button" class="btn btn-outline-primary btn-lg" style="float: right;" (click)="deleteFunc()"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+    <img src="{{tour.image}}" style="width: 300px; float: left; margin: 10px; clip-path: circle(50% at 50% 50%); ">
+    <h1 class="display-4">{{tour.name | uppercase}}</h1>
+    <p class="lead">{{tour.description}}</p>
+    <hr class="my-4">
+    <p>Destination: {{tour.destination}}<br>Country: {{tour.country | uppercase}}<br>Start: {{tour.dateStart | date: 'short' }}<br>End: {{tour.dateEnd | date: 'short'}}<br>Price: {{tour.price | currency: 'EUR'}}<br></p>
+    <h3 *ngIf="tour.availablePlaces== 0">Trip Sold Out</h3>
+    <h3 *ngIf="tour.availablePlaces>0" [ngStyle]="{'color':3>=tour.availablePlaces ? 'red' : 'black' }">Available Places: {{tour.availablePlaces}}</h3>
+
+    <button [ngStyle] ="{'visibility':tour.availablePlaces != tour.totalPlaces ? 'visible' : 'hidden'}"
+            style="margin: 5px;" class="btn btn-danger btn-lg" href="#" type="button" (click)="resignFunc()">-</button >
+    <button [ngStyle] ="{'visibility':tour.availablePlaces>0 ? 'visible' : 'hidden'}" style="margin: 5px;"
+         class="btn btn-success btn-lg" href="#" type="button" (click)="bookFunc()">+</button >
+    <p style="margin: 0;">Rate Trip:</p>
+    <ngb-rating [(rate)]=userVote (rateChange)="somethingChanged(userVote)" ></ngb-rating>
+    <p style="margin: 0;">Avarage Rate: {{tour.rating |  number:'1.0-2'}}</p>
+    <p>Total Votes: {{tour.totalVotes}}</p>
+</div>

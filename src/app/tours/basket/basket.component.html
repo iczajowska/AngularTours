@@ -1,0 +1,10 @@
+<div class="alert" style="color:white" [ngStyle]="{'background-color': bookedTrips>10 ? 'green' : 'red'}">
+    <div style="float: left; font-size: 48px; margin: 5px;">
+        <fa-icon [icon]="faShoppingCart"></fa-icon>
+    </div>
+    <div style="margin-top: 10px;">
+        <h4>Total Booked Trips: {{bookedTrips}}<br>
+            Sum Total: {{sumTotal | currency: 'EUR'}}
+        </h4>
+    </div>
+</div>

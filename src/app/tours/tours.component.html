@@ -1,0 +1,75 @@
+
+<div class="container mt-5">
+    <div class = "row">
+      <!-- <div class="alert col-4" style="color: white; font-size: 20px;" [ngStyle]="{'background-color': bookedTrips>10 ? 'green' : 'red'}">
+        <h3>Total Booked Trips: {{bookedTrips}}</h3>
+      </div> -->
+      <div class="col-4 offset-8" >
+        <app-basket [toursBooked]="tours"></app-basket>
+      </div>  
+    </div>
+    <div class="row ">
+      <div class="col-4 offset-2 mt-4">
+        <span class="lead">Search for tours</span>
+        <input
+          [(ngModel)]="searchText"
+          placeholder="e.g. Brasil, Paris, beautiful... "
+          class="form-control"
+        />
+      </div>
+      <div class="col-4 mt-4">
+        <span class="lead">Country</span><br>
+        <select [(ngModel)] = "selectCountry" class="form-control">
+          <option></option>
+          <option *ngFor="let tour of tours | filterCountryUnique ">
+            {{tour}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4  mt-4 custom-slider">
+        <span class="lead">Price</span>
+        <ng5-slider
+          [(value)]="value"
+          [(highValue)]="highValue"
+          [options]="options"
+        ></ng5-slider>
+      </div>
+      <div class="col-4  mt-4 custom-slider">
+        <span class="lead">Rate</span>
+        <ng5-slider
+          [(value)]="value2"
+          [(highValue)]="highValue2"
+          [options]="options2"
+        ></ng5-slider>
+      </div>
+      <div class="col-4  mt-4">
+        <span class="lead">Date</span><br>
+        <ng5-slider
+          [(value)]="value3"
+          [(highValue)]="highValue3"
+          [options]="options3"
+        ></ng5-slider>
+      </div>
+    </div>
+  
+
+<div style="margin-top:15px;" *ngFor="let tour of tours | filterName: searchText | filterByCountry: selectCountry | filterPriceMin: value | filterPriceMax: highValue | filterRateMin: value2 | filterRateMax: highValue2 | filterDateStart: value3 | filterDateEnd: highValue3">
+<!-- | filterName: searchText 
+| filterByCountry: selectCountry 
+| filterPriceMin: value
+| filterPriceMax: highValue
+| filterRateMin: value2
+| filterRateMax: highValue2
+| filterDateStart: value3
+| filterDateEnd: highValue3" -->
+    <app-tour 
+        [tour]="tour" 
+        (resign)="onResignFun($event)" 
+        (book)="onBookFun($event)"
+        (delete)="onDeleteFun($event)"
+        [bordCol]="tour.id === maxPriceTourID ? 'red' : (tour.id === minPriceTourID ? 'green' : 'transparent')">
+    </app-tour>
+</div>
+</div>
+<app-tour-form [idMax]="maxID" (tourForm)="onSubmitFun($event)"></app-tour-form>
