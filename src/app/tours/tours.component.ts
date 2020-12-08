@@ -84,8 +84,10 @@ export class ToursComponent implements OnInit {
   }
   onSubmitFun(tourNew: ITour){
     this.tours.push(tourNew);
+    this.changeDetection.detectChanges();
     this.tours = Object.create(this.tours);
 
+    console.log(this.tours);
     this.changeDetection.detectChanges();
     this.priceMinMaxID();
     this.findMaxID();
