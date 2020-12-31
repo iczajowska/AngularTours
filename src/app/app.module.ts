@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToursComponent } from './tours/tours.component';
 import { ToursService } from './tours.service';
@@ -19,7 +22,11 @@ import { FilterPriceMaxPipe } from './common/filter-price-max.pipe';
 import { FilterPriceMinPipe } from './common/filter-price-min.pipe';
 import { FilterDateStartPipe } from './common/filter-date-start.pipe';
 import { FilterDateEndPipe } from './common/filter-date-end.pipe';
-import { BasketComponent } from './tours/basket/basket.component';
+import { BasketComponent } from './basket/basket.component';
+import { environment } from 'src/environments/environment';
+import { NavbarComponent } from './navbar/navbar.component';
+import { TourBasketComponent } from './basket/tour-basket/tour-basket.component';
+import { TourCardComponent } from './tours/tour-card/tour-card.component';
 
 @NgModule({
   declarations: [
@@ -36,10 +43,16 @@ import { BasketComponent } from './tours/basket/basket.component';
     FilterPriceMinPipe,
     FilterDateStartPipe,
     FilterDateEndPipe,
-    BasketComponent
+    BasketComponent,
+    NavbarComponent,
+    TourBasketComponent,
+    TourCardComponent
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig ),
+    AngularFirestoreModule,
+    AppRoutingModule,
     FontAwesomeModule,
     FormsModule, 
     ReactiveFormsModule, 

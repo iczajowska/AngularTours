@@ -5,7 +5,6 @@
         <h3>Total Booked Trips: {{bookedTrips}}</h3>
       </div> -->
       <div class="col-4 offset-8" >
-        <app-basket [toursBooked]="tours"></app-basket>
       </div>  
     </div>
     <div class="row ">
@@ -54,7 +53,7 @@
     </div>
   
 
-<div style="margin-top:15px;" *ngFor="let tour of tours  | filterName: searchText | filterByCountry: selectCountry | filterPriceMin: value | filterPriceMax: highValue | filterRateMin: value2 | filterRateMax: highValue2 | filterDateStart: value3 | filterDateEnd: highValue3">
+    <div class="row" style="margin-top:15px;" >
 <!-- | filterName: searchText 
 | filterByCountry: selectCountry 
 | filterPriceMin: value
@@ -63,13 +62,14 @@
 | filterRateMax: highValue2
 | filterDateStart: value3
 | filterDateEnd: highValue3" -->
-    <app-tour 
-        [tour]="tour" 
-        (resign)="onResignFun($event)" 
-        (book)="onBookFun($event)"
-        (delete)="onDeleteFun($event)"
-        [bordCol]="tour.id === maxPriceTourID ? 'red' : (tour.id === minPriceTourID ? 'green' : 'transparent')">
-    </app-tour>
+      <app-tour-card 
+          class="col-4 mt-4"
+          *ngFor="let tour of tours | filterName: searchText | filterByCountry: selectCountry | filterPriceMin: value| filterPriceMax: highValue | filterRateMin: value2 | filterRateMax: highValue2 | filterDateStart: value3 | filterDateEnd: highValue3 "
+          [tour]="tour" 
+          (resign)="onResignFun($event)" 
+          (book)="onBookFun($event)"
+          (delete)="onDeleteFun($event)"
+          [bordCol]="tour.id === maxPriceTourID ? 'border-danger' : (tour.id === minPriceTourID ? 'border-success' : '')">
+      </app-tour-card>
+    </div>
 </div>
-</div>
-<app-tour-form [idMax]="maxID" (tourForm)="onSubmitFun($event)"></app-tour-form>

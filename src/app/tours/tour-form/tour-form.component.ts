@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators }  from '@angular/forms';
+import { ToursService } from 'src/app/tours.service';
 import { ITour } from '../../itour';
 
 
@@ -10,17 +11,14 @@ import { ITour } from '../../itour';
 })
 export class TourFormComponent {
   checkoutForm;
-  @Input() idMax: number;
-  @Output() tourForm = new EventEmitter<ITour>();
 
   dateRegex ='^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\\d{4}$';
-  priceRegex = "^\\d+\\.\\d{0,2}$";
+  priceRegex = "^(\\d+\\.\\d{0,2})|(\\d+)$";
   number = "^\\d+$";
   
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private toursService: ToursService) {
     this.checkoutForm = this.formBuilder.group({
-      id: 0,
       name:  ["", Validators.required],
       destination: ["", Validators.required],
       country:  ["", Validators.required],
@@ -30,7 +28,7 @@ export class TourFormComponent {
       description: ["", Validators.required],
       image: ["", Validators.required],
       availablePlaces: 0,
-      totalPlaces: ["", Validators.pattern(this.number)],
+      totalPlaces: ["", [Validators.required,Validators.pattern(this.number)]],
       rating: 0.0,
       totalVotes: 0
     });
@@ -43,10 +41,13 @@ export class TourFormComponent {
 
     if (this.checkoutForm.dirty && this.checkoutForm.valid) {
       let today = new Date();
+
+      var dateParts = customerData.dateStart.split("/");
+
+      customerData.dateStart = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);//new Date(customerData.dateStart);
       
-      customerData.id = this.idMax;
-      customerData.dateStart = new Date(customerData.dateStart);
-      customerData.dateEnd = new Date(customerData.dateEnd);
+      var dateParts = customerData.dateEnd.split("/");
+      customerData.dateEnd = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);//new Date(customerData.dateEnd);
       customerData.price = parseFloat(customerData.price);
       customerData.totalPlaces = parseInt(customerData.totalPlaces, 10);
       customerData.availablePlaces = customerData.totalPlaces;
@@ -57,7 +58,9 @@ export class TourFormComponent {
       }
 
       console.log(customerData);
-      this.tourForm.emit(customerData);
+
+      this.toursService.addTour(customerData);
+      alert("Tour added correctly!");
 
       this.checkoutForm.reset();
     }else{

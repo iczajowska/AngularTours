@@ -1,15 +1,16 @@
 export interface ITour {
-    id: number,
+    id: string,
     name: string,
     destination: string,
     country:string,
-    dateStart: Date,
-    dateEnd: Date,
+    dateStart: any,
+    dateEnd: any,
     price: number,
     description:string,
     image: string,
     availablePlaces: number,
     totalPlaces: number,
     rating: number,
-    totalVotes: number
+    totalVotes: number,
+    inBasket: number
 }
