@@ -62,9 +62,10 @@
 | filterRateMax: highValue2
 | filterDateStart: value3
 | filterDateEnd: highValue3" -->
+      
       <app-tour-card 
           class="col-4 mt-4"
-          *ngFor="let tour of tours | filterName: searchText | filterByCountry: selectCountry | filterPriceMin: value| filterPriceMax: highValue | filterRateMin: value2 | filterRateMax: highValue2 | filterDateStart: value3 | filterDateEnd: highValue3 "
+          *ngFor="let tour of tours | filterName: searchText | filterByCountry: selectCountry | filterPriceMin: value| filterPriceMax: highValue | filterRateMin: value2 | filterRateMax: highValue2 | filterDateStart: value3 | filterDateEnd: highValue3 | filterAuth: authService"
           [tour]="tour" 
           (resign)="onResignFun($event)" 
           (book)="onBookFun($event)"

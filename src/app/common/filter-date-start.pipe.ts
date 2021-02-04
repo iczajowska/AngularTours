@@ -8,8 +8,8 @@ import { ITour } from '../itour';
 export class FilterDateStartPipe implements PipeTransform {
 
   transform(items: ITour[], value: number): ITour[] {
-    if (!items) return [];
-    if (value === 0) return items;
+    if (!items) { return []; }
+    if (value === 0) { return items; }
 
     return items.filter(it => {
       return it.dateStart >= new Date(value);

@@ -1,0 +1,25 @@
+<div>
+
+</div>
+
+<div class="jumbotron" >
+    <h4 >{{user.email }}</h4>
+    Admin: {{user.admin}} 
+    <button [ngStyle] ="{'visibility':!user.admin ? 'visible' : 'hidden'}" style="margin: 5px;" class="btn btn-danger btn-lg" type="button" (click)="adminChange()">-</button >
+    <button [ngStyle] ="{'visibility':user.admin ? 'visible' : 'hidden'}" style="margin: 5px;" class="btn btn-success btn-lg" type="button" (click)="adminChange()">+</button >
+    <br>
+    Editor: {{user.editor}}
+    <button [ngStyle] ="{'visibility':!user.editor ? 'visible' : 'hidden'}" style="margin: 5px;" class="btn btn-danger btn-lg" type="button" (click)="editorChange()">-</button >
+    <button [ngStyle] ="{'visibility':user.editor ? 'visible' : 'hidden'}" style="margin: 5px;" class="btn btn-success btn-lg" type="button" (click)="editorChange()">+</button >
+    <br>
+    VIP: {{user.vip}}
+    <button [ngStyle] ="{'visibility':!user.vip ? 'visible' : 'hidden'}" style="margin: 5px;" class="btn btn-danger btn-lg" type="button" (click)="vipChange()">-</button >
+    <button [ngStyle] ="{'visibility':user.vip ? 'visible' : 'hidden'}" style="margin: 5px;" class="btn btn-success btn-lg" type="button" (click)="vipChange()">+</button >
+    <br>
+<!-- 
+    <button [ngStyle] ="{'visibility':tour.availablePlaces != tour.totalPlaces ? 'visible' : 'hidden'}"
+            style="margin: 5px;" class="btn btn-danger btn-lg" href="#" type="button" (click)="resignFunc()">-</button >
+    <button [ngStyle] ="{'visibility':tour.availablePlaces>0 ? 'visible' : 'hidden'}" style="margin: 5px;"
+         class="btn btn-success btn-lg" href="#" type="button" (click)="bookFunc()">+</button > -->
+
+</div>

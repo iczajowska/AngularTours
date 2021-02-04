@@ -7,12 +7,12 @@ import { ITour } from '../itour';
 })
 export class FilterCountryUniquePipe implements PipeTransform {
 
-  transform(items: ITour[], args?: any):  String[] {
-    if(!items) return [];
+  transform(items: ITour[], args?: any): String[] {
+    if (!items) { return []; }
 
     const unique = (value, index, self) => {
       return self.indexOf(value) === index;
-    }
+    };
 
     return items.map(t => t.country).filter(unique);
   }

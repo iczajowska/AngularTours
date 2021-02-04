@@ -1,0 +1,12 @@
+<div class="card" >
+    
+    <img class="card-img-top" src="{{tour.image}}" alt="Card image cap">
+    <button [hidden]="!authService.isUserAdmin()" type="button" class="btn btn-outline-secondary btn-lg" style="float: right;" (click)="deleteFunc()"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+    <div class="card-body" style="text-align: center;">
+        <h5 class="card-title">{{tour.name | uppercase}}</h5>      
+        <p class="card-text">Destination: {{tour.destination}}<br>Country: {{tour.country | uppercase}}<br>Start: {{tour.dateStart | date: 'short' }}<br>End: {{tour.dateEnd | date: 'short'}}<br>Price: {{tour.price | currency: 'EUR'}}<br></p>
+        <h6 *ngIf="tour.availablePlaces== 0">Trip Sold Out</h6>
+        <h6 *ngIf="tour.availablePlaces>0" [ngStyle]="{'color':3>=tour.availablePlaces ? 'red' : 'black' }">Available Places: {{tour.availablePlaces}}</h6>
+        <a  class="btn btn-primary" [routerLink]="['/toursAdmin', this.tour.id]" routerLinkActive="active">Edit</a>
+    </div>
+</div>

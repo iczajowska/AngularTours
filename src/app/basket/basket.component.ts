@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, OnChanges ,SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges , SimpleChanges } from '@angular/core';
 import { ITour } from 'src/app/itour';
-import { faShoppingBasket} from '@fortawesome/free-solid-svg-icons'
-import { ToursService } from '../tours.service';
+import { faShoppingBasket} from '@fortawesome/free-solid-svg-icons';
+import { ToursService } from '../services/tours.service';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -12,33 +12,36 @@ import { map } from 'rxjs/operators';
 export class BasketComponent implements OnInit {
   toursBooked: ITour[];
 
-  bookedTrips: number =0;
+  bookedTrips: number = 0;
   sumTotal: number = 0;
   faShoppingBasket = faShoppingBasket;
 
-  constructor(private toursService:ToursService) {
+  constructor(private toursService: ToursService) {
   }
 
-  ngOnInit():void{
+  ngOnInit(): void{
     this.toursService.getBookedTrips().pipe(
       map(changes =>
       changes.map(c =>
-      ({​​ 
-        id: c.payload.doc.id, ...c.payload.doc.data()  
-       }​​)
+      ({
+        id: c.payload.doc.id, ...c.payload.doc.data()
+       })
       ))
       ).subscribe(tours => {
-        ​​this.toursBooked = tours; 
+        this.toursBooked = tours;
         this.basketChanges(tours);
-      },err=>console.log(err)​​); 
+      }, err => console.log(err));
   }
 
+  // tslint:disable-next-line:typedef
   basketChanges(newTours: ITour[]){
-    if(newTours.length !==0){
+    if (newTours.length !== 0){
+      // tslint:disable-next-line:only-arrow-functions typedef
       this.bookedTrips = newTours.map(t => t.inBasket).reduce(function(a, b) {
         return a + b;
       });
-      this.sumTotal = newTours.map(t => (t.inBasket)*t.price).reduce(function(a, b) {
+      // tslint:disable-next-line:only-arrow-functions typedef
+      this.sumTotal = newTours.map(t => (t.inBasket) * t.price).reduce(function(a, b) {
         return a + b;
       });
     }else{
@@ -47,12 +50,14 @@ export class BasketComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:typedef
   onResignFun(tourID: string){
-    console.log("resign",tourID);
+    console.log('resign', tourID);
 
-    var foundIndex  = this.toursBooked.findIndex(x => x.id === tourID);
-    
-    if(this.toursBooked[foundIndex].inBasket>0){
+    // tslint:disable-next-line:prefer-const
+    let foundIndex  = this.toursBooked.findIndex(x => x.id === tourID);
+
+    if (this.toursBooked[foundIndex].inBasket > 0){
       this.toursService.updateTour(tourID, {
         availablePlaces: this.toursBooked[foundIndex].availablePlaces + 1,
         inBasket: this.toursBooked[foundIndex].inBasket - 1
@@ -60,14 +65,16 @@ export class BasketComponent implements OnInit {
 
     }
     else{
-      alert("You have not booked choosen tour!")
+      alert('You have not booked choosen tour!');
     }
   }
 
+  // tslint:disable-next-line:typedef
   onBookFun(tourID: string){
-    console.log("booked",tourID);
+    console.log('booked', tourID);
 
-    var foundIndex  = this.toursBooked.findIndex(x => x.id === tourID);
+    // tslint:disable-next-line:prefer-const
+    let foundIndex  = this.toursBooked.findIndex(x => x.id === tourID);
 
     this.toursService.updateTour(tourID, {
       availablePlaces: this.toursBooked[foundIndex].availablePlaces - 1,

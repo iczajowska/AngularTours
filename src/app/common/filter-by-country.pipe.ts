@@ -8,10 +8,10 @@ import { ITour } from '../itour';
 export class FilterByCountryPipe implements PipeTransform {
 
   transform(items: ITour[], country: string): ITour[] {
-    if(!items) return [];
+    if (!items) { return []; }
 
-    if(!country) return items;
-    
+    if (!country) { return items; }
+
     return items.filter(it => {
       return it.country.toLowerCase().includes(country.toLowerCase());
     });

@@ -1,7 +1,6 @@
-
 <div class="jumbotron jumbotron-fluid" style="background-color: white;">
     <div class="container">
-    <h1 class="display-4">Form Add New Tour</h1>
+    <h1 class="display-4">Form Edit Tour</h1>
 
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
         <div class="form-group">
@@ -62,7 +61,7 @@
             <input id="totalPlaces" type="text" formControlName="totalPlaces" class="form-control"  placeholder="e.g. 50">
         </div>
     
-        <button class="button" type="submit" class="btn btn-primary"  style="margin: 5px;">Submit</button>
+        <button class="button" type="submit" class="btn btn-primary" style="margin: 5px;">Submit</button>
         <button class="button" type="button" class="btn btn-primary" (click)="cancelFunc()" style="margin: 5px;">Cancel</button>
     </form>
 </div>

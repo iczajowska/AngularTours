@@ -1,0 +1,22 @@
+
+
+<div class="container mt-5">
+
+    <div class="row ">
+      <div class="col-4 offset-2 mt-4">
+        <a class="btn btn-primary nav-link"  role="button" (click)="addTour()">Add Tour</a>
+      </div>
+      <div *ngIf="authService.isUserAdmin()"class="col-4 mt-4">
+        <a class="btn btn-primary nav-link"  role="button" (click)="showUsers()">Show Users</a>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:15px;" >
+      <app-tour-admin
+          class="col-4 mt-4"
+          *ngFor="let tour of tours"
+          [tour]="tour"
+          (delete)="onDeleteFun($event)">
+      </app-tour-admin>
+    </div>
+</div>

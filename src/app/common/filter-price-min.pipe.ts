@@ -8,8 +8,8 @@ import { ITour } from '../itour';
 export class FilterPriceMinPipe implements PipeTransform {
 
   transform(items: ITour[], price: Number): ITour[] {
-    if (!items) return [];
-    if (!price) return items;
+    if (!items) { return []; }
+    if (!price) { return items; }
 
     return items.filter(it => {
       return it.price >= price;

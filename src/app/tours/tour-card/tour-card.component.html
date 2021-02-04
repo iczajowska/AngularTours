@@ -1,7 +1,7 @@
-<div class="card {{bordCol}}"  >
+<div class="card {{bordCol}}" >
     
     <img class="card-img-top" src="{{tour.image}}" alt="Card image cap">
-    <button type="button" class="btn btn-outline-secondary btn-lg" style="float: right;" (click)="deleteFunc()"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+    <!-- <button [hidden]="!authService.isUserAdmin()" type="button" class="btn btn-outline-secondary btn-lg" style="float: right;" (click)="deleteFunc()"><fa-icon [icon]="faTrashAlt"></fa-icon></button> -->
     <div class="card-body" style="text-align: center;">
         <h5 class="card-title">{{tour.name | uppercase}}</h5>
         <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
@@ -11,9 +11,9 @@
         <h6 *ngIf="tour.availablePlaces>0" [ngStyle]="{'color':3>=tour.availablePlaces ? 'red' : 'black' }">Available Places: {{tour.availablePlaces}}</h6>
     
         <button [ngStyle] ="{'visibility':tour.availablePlaces != tour.totalPlaces ? 'visible' : 'hidden'}"
-            style="margin: 5px;" class="btn btn-danger btn-lg" href="#" type="button" (click)="resignFunc()">-</button >
+            style="margin: 5px;" class="btn btn-danger btn-lg" type="button" (click)="resignFunc()">-</button >
         <button [ngStyle] ="{'visibility':tour.availablePlaces>0 ? 'visible' : 'hidden'}" style="margin: 5px;"
-         class="btn btn-success btn-lg" href="#" type="button" (click)="bookFunc()">+</button >
+         class="btn btn-success btn-lg" type="button" (click)="bookFunc()">+</button >
         <br>
         <a  class="btn btn-primary" [routerLink]="['/tours', this.tour.id]" routerLinkActive="active">Show More</a>
         
