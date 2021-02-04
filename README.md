@@ -2,6 +2,33 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
 
+## Project prepared for Web Applications Lab
+
+### Log In/Sign Up panel
+![LogIn SignUp](images/login_signup.PNG)
+
+### Tours List
+![Tours](images/tours.PNG)
+
+### Search List
+![Tours search](images/search.PNG)
+
+### Tour view 
+![Tour](images/tour_panel.PNG)
+
+### Basket
+![Basket](images/basket.PNG)
+
+### Admin/Editor Panel
+![Admin/ Editor panel](images/admin_panel.PNG)
+
+### Create new tour 
+![Create new tour](images/new_tour.PNG)
+
+### User Roles Panel
+![Users](images/users.PNG)
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
